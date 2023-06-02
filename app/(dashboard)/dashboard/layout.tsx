@@ -59,7 +59,7 @@ const Layout = async ({ children }: LayoutProps) => {
           Your chats
           {friends.length === 0 ? (
             <p className="text-xs font-semibold leading-6 text-indigo-400">
-              You haven't added any friends
+              You have not added any friends.
             </p>
           ) : null}
         </div>
