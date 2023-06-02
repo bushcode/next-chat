@@ -35,12 +35,6 @@ export const AuthOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      interface CustomSession extends Session {
-        refreshToken: string;
-      }
-      interface CustomSession extends Session {
-        refreshToken: string;
-      }
       const dbUserResult = (await fetchRedis("get", `user:${token.id}`)) as
         | string
         | null;
