@@ -2,7 +2,11 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    scrollRestoration: true,
   },
-}
+  images: {
+    domains: ["lh3.googleusercontent.com", "i.scdn.co"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
