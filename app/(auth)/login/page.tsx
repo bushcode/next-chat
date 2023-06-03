@@ -4,10 +4,9 @@ import React, { useState } from "react";
 import Button from "../../components/ui/button";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
+import { Icons } from "@/app/components/Icons";
 
-interface Props {}
-
-export default function Page({}: Props) {
+export default function Page() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function LoginWithGoogle() {
@@ -26,7 +25,13 @@ export default function Page({}: Props) {
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full flex flex-col items-center max-w-md space-y-8">
           <div className="flex flex-col items-center gap-8">
-            logo
+            <div>
+              <Icons.Logo className="h-8 w-auto text-indigo-600 animate-pulse" />
+              <h1 className="font-bold text-2xl text-indigo-700 text-center">
+                Chattr
+              </h1>
+            </div>
+
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Sign in to your account
             </h2>
