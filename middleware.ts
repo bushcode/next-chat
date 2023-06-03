@@ -15,8 +15,6 @@ export default withAuth(
       pathname.startsWith(route)
     );
 
-    console.log("isAuth", isAuth);
-
     if (isLoginPage) {
       if (isAuth) {
         return NextResponse.redirect(new URL("/dashboard", req.url));
