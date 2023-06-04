@@ -13,6 +13,7 @@ type FormData = z.infer<typeof addFriendValidator>;
 
 export default function AddFriendButton({}: AddFriendButtonProps) {
   const [showSuccessState, setShowSuccessState] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -25,12 +26,15 @@ export default function AddFriendButton({}: AddFriendButtonProps) {
 
   async function addFriend(email: string) {
     try {
+      setLoading(true);
       const validatedEmail = addFriendValidator.parse({ email });
 
       await axios.post("/api/friends/add", { email: validatedEmail });
       setShowSuccessState(true);
+      setLoading(false);
     } catch (error) {
       //TODO: Toast for errors
+      setLoading(false);
       if (error instanceof z.ZodError) {
         setError("email", { message: error.message });
         return;
@@ -65,7 +69,7 @@ export default function AddFriendButton({}: AddFriendButtonProps) {
           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           placeholder="you@example.com"
         />
-        <Button>Add</Button>
+        <Button isLoading={loading}>Add</Button>
       </div>
       <p className="mt-1 text-sm text-red-600">{errors.email?.message}</p>
       {showSuccessState && (

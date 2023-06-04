@@ -27,6 +27,9 @@ export default async function page({}: Props) {
         -1
       )) as string[];
 
+      console.log("hi", lastMessageRaw);
+      if (lastMessageRaw === undefined) return { ...friend, lastMessage: null };
+
       const lastMessage = JSON.parse(lastMessageRaw) as Message;
 
       return {
@@ -71,14 +74,20 @@ export default async function page({}: Props) {
 
               <div>
                 <h4 className="text-lg font-semibold">{friend.name}</h4>
-                <p className="mt-1 max-w-md">
-                  <span className="text-zinc-400">
-                    {friend.lastMessage.senderId === session.user.id
-                      ? "You: "
-                      : ""}
-                  </span>
-                  {friend.lastMessage.text}
-                </p>
+                {friend.lastMessage === null ? (
+                  <p className="mt-1 max-w-md text-zinc-500">
+                    You have not sent any messages to this friend yet.
+                  </p>
+                ) : (
+                  <p className="mt-1 max-w-md">
+                    <span className="text-zinc-400">
+                      {friend.lastMessage?.senderId === session.user.id
+                        ? "You: "
+                        : ""}
+                    </span>
+                    {friend.lastMessage?.text}
+                  </p>
+                )}
               </div>
             </Link>
           </div>
